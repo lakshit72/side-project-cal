@@ -18,7 +18,7 @@ class Calculator{
         }
     }
     insertNum(number){
-        if (this.currentoperand.includes(".") && number === ".") return
+        if (this.currentoperand.toString().includes(".") && number === ".") return
         this.currentoperand = this.currentoperand.toString() + number.toString();
     }
     operationOption(operation){
