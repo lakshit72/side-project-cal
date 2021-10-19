@@ -12,9 +12,13 @@ class Calculator{
         this.prevInput.innerText = "";
     }
     delete(){
-
+        if (this.currentoperand !== ""){
+            this.currentoperand = this.currentoperand.toString().slice(0,-1)
+            this.currentInput.innerText = this.currentoperand
+        }
     }
     insertNum(number){
+        if (this.currentoperand.includes(".") && number === ".") return
         this.currentoperand = this.currentoperand.toString() + number.toString();
     }
     operationOption(operation){
@@ -35,25 +39,25 @@ class Calculator{
     processNum(){
         switch (this.sign) {
             case  "+":
-                this.currentoperand = parseInt(this.currentoperand,10)+ parseInt(this.prevoperand,10)
+                this.currentoperand = parseFloat(this.currentoperand,10)+ parseFloat(this.prevoperand,10)
                 this.currentInput.innerText = this.currentoperand
                 this.prevInput.innerText =""
                 this.prevoperand = ""
                 break;
             case  "-":
-                this.currentoperand = parseInt(this.currentoperand,10) - parseInt(this.prevoperand,10)
+                this.currentoperand = parseFloat(this.currentoperand,10) - parseFloat(this.prevoperand,10)
                 this.currentInput.innerText = this.currentoperand
                 this.prevInput.innerText =""
                 this.prevoperand = ""
                 break;
             case  "/":
-                this.currentoperand = parseInt(this.prevoperand,10) / parseInt(this.currentoperand,10)
+                this.currentoperand = parseFloat(this.prevoperand,10) / parseFloat(this.currentoperand,10)
                 this.currentInput.innerText = this.currentoperand
                 this.prevInput.innerText =""
                 this.prevoperand = ""
                 break; 
             case  "X":
-                this.currentoperand = parseInt(this.currentoperand,10) * parseInt(this.prevoperand,10)
+                this.currentoperand = parseFloat(this.currentoperand,10) * parseFloat(this.prevoperand,10)
                 this.currentInput.innerText = this.currentoperand
                 this.prevInput.innerText =""
                 this.prevoperand = ""
@@ -98,4 +102,8 @@ equalButton.addEventListener('click',()=>{
 
 clearButton.addEventListener('click',()=>{
     calculator.clear()
+})
+
+deleteButton.addEventListener('click', ()=>{
+    calculator.delete()
 })
