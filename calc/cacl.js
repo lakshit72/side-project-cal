@@ -31,6 +31,12 @@ class Calculator{
     operationOption(operation){
         if (this.prevoperand === "" && operation === "=") return
         if(this.currentoperand == "") return
+        if(operation == "underroot"){
+
+            this.currentoperand = Math.sqrt(parseFloat(this.currentoperand,10))
+            this.currentInput.innerText = this.currentoperand
+            return
+        }
         if (this.prevoperand !== ""){
             this.sign = this.prevoperand.charAt(this.prevoperand.length-1)
             this.processNum()
