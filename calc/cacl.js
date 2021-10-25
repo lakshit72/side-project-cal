@@ -16,13 +16,21 @@ class Calculator{
             this.currentoperand = this.currentoperand.toString().slice(0,-1)
             this.currentInput.innerText = this.currentoperand
         }
+        else{
+            this.prevoperand = this.prevoperand.slice(0,-2)
+            this. prevInput.innerText = ""
+            this.currentoperand = this.prevoperand
+            this.prevoperand = ""
+            this.currentInput.innerText = this.currentoperand
+        }
     }
     insertNum(number){
         if (this.currentoperand.toString().includes(".") && number === ".") return
-        this.currentoperand = this.currentoperand.toString() + number.toString();
+            this.currentoperand = this.currentoperand.toString() + number.toString();
     }
     operationOption(operation){
         if (this.prevoperand === "" && operation === "=") return
+        if(this.currentoperand == "") return
         if (this.prevoperand !== ""){
             this.sign = this.prevoperand.charAt(this.prevoperand.length-1)
             this.processNum()
@@ -61,7 +69,12 @@ class Calculator{
                 this.currentInput.innerText = this.currentoperand
                 this.prevInput.innerText =""
                 this.prevoperand = ""
-                break;       
+                break;
+            case "^":
+                this.currentoperand = parseFloat(this.prevoperand,10) ** parseFloat(this.currentoperand,10)
+                this.currentInput.innerText = this.currentoperand
+                this.prevInput.innerText =""
+                this.prevoperand = "" 
             
         }
     }
